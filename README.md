@@ -1,53 +1,93 @@
-application de monitoring IoT développée principalement  avec (Laravel 12, Bootstrap, Chart.js, mySQL) permettant la gestion de modules (capteurs) avec génération automatique de données, visualisation via graphiques, et notifications visuelles et textuelles temporaires en cas de dysfonctionnement. Voici les étapes pour l’exécuter, et le tester.
+📡 Application de Monitoring IoT – Laravel 12
+Cette application de monitoring IoT a été développée avec Laravel 12, Bootstrap, Chart.js et MySQL.
+Elle permet la gestion de modules (capteurs) avec :
 
-#Fonctionnalités
-- Ajout de modules via formulaire.
-- Visualisation avec graphiques (Chart.js).
-- Notifications visuelles (bordures rouges/vertes).
-- Notification textuelle temporaire en cas de       dysfonctionnement (disparaît après 5 secondes).
-- Génération aléatoire de données et pannes.
+Génération automatique de données (y compris des pannes simulées),
 
-#Prérequis :
-PHP (>= 8.2)
-Composer (derniere version)
-mySQL (installer avec XAMPP de préference)
+Visualisation graphique des données (via Chart.js),
 
-#Installer les Dépendances
-se positionner dans le dossier du projet puis lancer la commande suivante :
-composer install
+Notifications visuelles et textuelles temporaires en cas de dysfonctionnement.
 
-#creer le fichier ".en" à la racine du projet et y coller le contenu du fichier ".env.example"
+🚀 Fonctionnalités
+➕ Ajout de modules via formulaire
 
-#générer une clé d'application avec la commande suivante :
-php artisan key:generate
+📊 Visualisation en temps réel avec Chart.js
 
-#Mettez à jour .env si vos identifiants diffèrent
+🟥🟩 Notifications visuelles (bordures rouges en cas de panne, vertes sinon)
 
-#Initialiser la Base de Données avec la commande :
-php artisan migrate:fresh --seed  (creer la bd si necessaire)
+📢 Notification textuelle temporaire (disparaît automatiquement après 5 secondes)
+
+🔄 Génération aléatoire de données et de pannes (manuelle ou planifiée)
+
+🔧 Prérequis
+PHP ≥ 8.2
+
+Composer (dernière version)
+
+MySQL (idéalement installé via XAMPP)
+
+⚙️ Installation et Configuration
+1. Installer les dépendances
+Dans le terminal, placez-vous à la racine du projet :    composer install
+
+2. Configuration de l’environnement
+Copier le fichier .env.example en .env :    cp .env.example .env
 
 
-#demarrer le serveur avec la commande :
-php artisan serve
+Générer la clé de l'application :    php artisan key:generate
 
-#Ajouter des modules dans la vue via le bouton "Ajouter un Module"
+Adapter le fichier .env avec vos identifiants MySQL (DB_DATABASE, DB_USERNAME, DB_PASSWORD)
 
-#Configurer le Script de Génération Automatique :
-commande manuelle : php artisan modules:generate (le faire autant de fois qu'on veux générer des modules)
-Automatisez avec le Planificateur de Tâches (Windows) :
--Ouvrez "Planificateur de tâches" (recherchez dans le menu Démarrer).
--cliquer sur "Créez une tâche" :
--rubrique Général :
-Nom : "Laravel Scheduler".
-Cochez "Exécuter avec les privilèges les plus élevés" (ou "Executer avec les autorisations maximales")
--rublique Déclencheurs :
-cliquez sur Nouveau > "Planifié" > "Répéter toutes les 1 minute" > "Indéfinie".
--rubrique Actions :
-cliquer sur Nouveau > "Démarrer un programme".
-Programme : "C:\php\php.exe" (C:\xampp\php\php.exe si php est installé via XAMPP).
-Arguments : "chemin vers le fichier artisan du projet" schedule:run > NUL 2>&1
-Démarrer dans : "lien vers le projet"
+3. Initialiser la base de données :    php artisan migrate:fresh --seed
 
-cliquer sur : "Exécuter"
+💡 Créez votre base de données au préalable si elle n'existe pas.
 
-dans le terminale du projet taper : php artisan test
+
+4. Lancer le serveur Laravel : php artisan serve
+
+L'application sera accessible par défaut à l’adresse http://localhost:8000
+
+🧪 Tester et utiliser l’application
+Utilisez le bouton "Ajouter un Module" dans l'interface pour insérer de nouveaux capteurs.
+
+Les données sont générées automatiquement ou via une commande artisan.
+
+Les modules défaillants s'affichent avec une bordure rouge et une alerte textuelle temporaire.
+
+⚙️ Génération automatique des données
+#Méthode manuelle
+À lancer à tout moment :    php artisan modules:generate
+
+#Méthode automatique (Planificateur de tâches – Windows)
+Ouvrir le Planificateur de tâches (depuis le menu Démarrer)
+
+Cliquer sur "Créer une tâche"
+
+Configuration :
+
+Général :
+Nom : Laravel Scheduler
+
+Cocher "Exécuter avec les privilèges les plus élevés"
+
+Déclencheurs :
+Cliquer sur "Nouveau" > Type : Planifié
+
+Répéter toutes les 1 minute indéfiniment
+
+Actions :
+Cliquer sur "Nouveau"
+
+Programme : C:\php\php.exe (ou C:\xampp\php\php.exe selon votre installation)
+
+Arguments : artisan schedule:run > NUL 2>&1
+
+Démarrer dans : chemin vers votre projet
+
+Cliquer sur "OK" puis sur "Exécuter"
+
+✅ Lancer les tests
+Dans le terminal, exécuter :    php artisan test
+
+📌 Notes
+Le système simule des capteurs et pannes pour test uniquement.
